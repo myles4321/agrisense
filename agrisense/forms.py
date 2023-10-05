@@ -34,8 +34,7 @@ class FarmingInfoForm(FlaskForm):
                         ('20-30°C (Moderate)', '20-30°C (Moderate)'),
                         ('30-40°C (Warm)', '30-40°C (Warm)'),
                         ('Above 40°C (Hot)', 'Above 40°C (Hot)')
-                    ],
-                    validators=[InputRequired()])
+                    ])
     q2 = SelectField('How much rainfall does your region receive annually?',
                     choices=[
                         ('',''),
@@ -43,8 +42,7 @@ class FarmingInfoForm(FlaskForm):
                         ('500-1000 mm annually (Semi-arid)', '500-1000 mm annually (Semi-arid)'),
                         ('1000-1500 mm annually (Sub-humid)', '1000-1500 mm annually (Sub-humid)'),
                         ('More than 1500 mm annually (Humid)', 'More than 1500 mm annually (Humid)')
-                    ],
-                    validators=[InputRequired()])
+                    ])
     q3 = SelectField('What crops were grown on your land in the previous season?',
                     choices=[
                         ('',''),
@@ -55,8 +53,7 @@ class FarmingInfoForm(FlaskForm):
                         ('Tomatoes', 'Tomatoes'),
                         ('Onions', 'Onions'),
                         ('Beans', 'Beans')
-                    ],
-                    validators=[InputRequired()])
+                    ])
     q4 = SelectField('What crops are currently in high demand in your local market?',
                     choices=[
                         ('',''),
@@ -67,16 +64,14 @@ class FarmingInfoForm(FlaskForm):
                         ('Tomatoes', 'Tomatoes'),
                         ('onions', 'Onions'),
                         ('Beans', 'Beans')
-                    ],
-                    validators=[InputRequired()])
+                    ])
     q5 = SelectField('Does your soil retain moisture well, or does it tend to dry out quickly?',
                     choices=[
                         ('',''),
                         ('Poor (Dries quickly)', 'Poor (Dries quickly)'),
                         ('Fair', 'Fair'),
                         ('Good (retains moisture well)', 'Good (Retains Moisture Well)')
-                    ],
-                    validators=[InputRequired()])
+                    ])
     q6 = SelectField('What is the altitude of your farming location?',
                     choices=[
                         ('',''),
@@ -85,5 +80,4 @@ class FarmingInfoForm(FlaskForm):
                         ('1000-1500 meters (Highland)', '1000-1500 meters (Highland)'),
                         ('1500-2000 meters (Mountainous)', '1500-2000 meters (Mountainous)'),
                         ('Above 2000 meters (High Alpine)', 'Above 2000 meters (High Alpine)')
-                    ],
-                    validators=[InputRequired()])
+                    ])
