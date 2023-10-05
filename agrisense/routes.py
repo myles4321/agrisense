@@ -262,14 +262,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Flask setup
-app = Flask(__name__)
+
 app.secret_key = os.getenv('APPSECRET_KEY')
 
 # OpenWeatherMap API Key
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
 
 
-@app.route('/')
+@app.route('/weather')
 def index():
     response = requests.get('http://ip-api.com/json/')
 
