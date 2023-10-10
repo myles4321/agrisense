@@ -205,7 +205,7 @@ def huggingface():
 
 
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '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'
 openai.api_key = OPENAI_API_KEY
 chat_log = []
 
@@ -233,6 +233,7 @@ class DallEImage:
 
         return image  # fill in this line
 
+chat_log = []
 @app.route('/farminginfo', methods=['GET', 'POST'])
 def farminginfo():
     
@@ -297,14 +298,24 @@ def farminginfo():
 
         # Extract the assistant's response
         assistant_response = response['choices'][0]['message']['content']
-        
 
         # Append the assistant's response to the chat log
         chat_log.append({"role": "assistant", "content": assistant_response})
+        #chat_log.append(assistant_response)
+        
+        first_crop = f"give only the names of the first four crop suggestion, names only: {assistant_response}"
+        response2 = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=chat_log + [{"role": "user", "content": first_crop}]
+        )
+        firstt_crop = response2['choices'][0]['message']['content']
+        chat_log.append({"role": "assistant", "content": firstt_crop})
+        #chat_log.append(firstt_crop)
+        
         
         image_data = None
-        prompt = f"fish"
-        size = "1024x1024"
+        prompt = f"generate four seperate different realistic seed images of each of the crops in: {firstt_crop}"
+        size = "512x512"
         image = DallEImage().get_image_from_dalle(prompt, size)
         
         # Convert the image to bytes and encode it in base64
@@ -313,7 +324,7 @@ def farminginfo():
         image_data = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
         # Render the 'gpt.html' template with the form and response
-        return render_template('farminginfo.html', title='farminginfo', form=form, assistant_response=assistant_response, image_data=image_data)
+        return render_template('farminginfo.html', title='farminginfo', form=form, assistant_response=assistant_response,firstt_crop=firstt_crop, image_data=image_data)
 
     # Render the 'gpt.html' template with the form when the page is initially loaded
     return render_template('farminginfo.html', title='farminginfo', form=form)
